@@ -4,7 +4,9 @@
 namespace App\Controller;
 
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,7 +38,18 @@ class ArticleController extends AbstractController // As soon as we want to rend
         return $this->render('article/show.html.twig', [ // render() takes two arguments, the template we want to render and any variables and their values we want to use on that template
             'title' => ucwords(str_replace('-', ' ', $slug)),
             'comments' => $comments, // Passing the $comments array above to the template
+            'slug' => $slug,
         ]);
+    }
+
+    /**
+     * @Route("/news/{slug}/heart", name="article_toggle_heart", methods={"POST"})
+     */
+    public function toggleArticleHeart($slug, LoggerInterface $logger) // When this URL or endpoint is reached, it sends back a JSON array with the key "hearts" and the value set to a random number between 5 and 100
+    {
+        $logger->info('Article is being hearted');
+
+        return new JsonResponse(['hearts' => rand(5, 100)]);
     }
 
 }

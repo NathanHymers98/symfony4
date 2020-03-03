@@ -16,7 +16,10 @@
                                 <br>
                                 <span class="align-left article-details"><img class="article-author-img rounded-circle" src="{{ asset('images/alien-profile.png') }}"> Mike Ferengi </span>
                                 <span class="pl-2 article-details"> 3 hours ago</span>
-                                <span class="pl-2 article-details"> 5 <a href="#" class="fa fa-heart-o like-article"></a> </span>
+                                <span class="pl-2 article-details">
+                                    <span class="js-like-article-count">5</span> {# Giving this and the code below custom classes so that I can use those classes to target these things in JS#}
+                                    <a href="{{ path('article_toggle_heart', {slug: slug}) }}" class="fa fa-heart-o like-article js-like-article"></a>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -96,4 +99,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} {# Prints the contents of the parent block first, then this one. #}
+
+    <script src="{{ asset('js/article_show.js') }}"></script>
 {% endblock %}
