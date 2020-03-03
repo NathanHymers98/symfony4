@@ -1,3 +1,5 @@
+# When someone goes to the homepage "/" use the following controller and a specific method to build that page. The method is after the "::" in this case, it would be the method homepage
+# We can either creates routes here or above the controller method by using annotations
 #index:
 #    path: /
-#    controller: App\Controller\DefaultController::index
+#    controller: App\Controller\ArticleController::homepage
